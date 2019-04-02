@@ -12,16 +12,16 @@ namespace Triangle
 {
     public partial class Form1 : Form
     {
-        Bitmap main;
+        Bitmap main; 
 
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent(); // инициализация формы
             main = new Bitmap(pictureBox1.Width, pictureBox1.Height);
         }
 
-        View view = new View();
-        Controller ctrl = new Controller();
+        View view = new View(); // создание экземпляра класса View
+        Controller ctrl = new Controller(); //создание экземпляра класса Controller
 
         int getX = -2;
         int getY = -2;
@@ -31,25 +31,25 @@ namespace Triangle
             main = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             pictureBox1.Image = null;
             pictureBox1.BackgroundImage = null;
-            pictureBox1.Refresh();
-            ctrl.ClearDots();
+            pictureBox1.Refresh(); // обновление холста
+            ctrl.ClearDots(); // выгрузка списков, содержащих координаты точек
         }
         
-        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e) // обработчик клика кнопкой мыши
         {
             getX = e.X;
             getY = e.Y;
-            
-            Graphics g = Graphics.FromImage(main);
-            if (ctrl.SetupDot(getPB, getX, getY))
+
+            Graphics g = Graphics.FromImage(main); // инициализация работы с графикой
+            if (ctrl.SetupDot(getPB, getX, getY)) // проверка на количество добавленных точек на холсте
             {
-                g.DrawEllipse(new Pen(new SolidBrush(Color.Red), 4), getX - 7, getY - 7, 15, 15);
+                g.DrawEllipse(new Pen(new SolidBrush(Color.Red), 4), getX - 7, getY - 7, 15, 15); // отрисовка красных кругов (точек-середин сторон)
                 pictureBox1.BackgroundImage = main;
             }
-            GC.Collect();
+            GC.Collect(); // очистка памяти
         }
 
-        public PictureBox getPB
+        public PictureBox getPB // метод получения элемента холста (PictureBox1)
         {
             get
             {

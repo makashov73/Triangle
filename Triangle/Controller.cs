@@ -10,29 +10,30 @@ namespace Triangle
 {
     class Controller
     {
-        View view = new View();
+        View view = new View(); // создание экземпляра класса View
 
-        List<Point> points = new List<Point>();
-        List<Point> newpoints = new List<Point>();
+        List<Point> points = new List<Point>(); // инициализация списка координат points
+        List<Point> newpoints = new List<Point>(); // инициализация списка координат newpoints
 
-        public bool SetupDot(PictureBox map, int x, int y)
+        public bool SetupDot(PictureBox map, int x, int y) // инициализация метода подсчета установленных точек
         {
             Point dot = new Point(x, y);
             if (points.Count <= 2)
             {
-                points.Add(dot);
-                view.DrawDot(map, x, y);
+                points.Add(dot); // добавление в конец списка points значения координат текущей установленной точки
+                view.DrawDot(map, x, y); // вызов метода отрисовки точки на холсте
             }
             if (points.Count == 3)
             {
-                CalculatedDots(map, points);
+                CalculatedDots(map, points); // вызов метода вычисления сторон треугольника по введенным точкам
                 return false;
             }
             return true;
         }
 
-        public void CalculatedDots(PictureBox map, List<Point> points)
+        public void CalculatedDots(PictureBox map, List<Point> points) // инициализация метода вычисления сторон треугольника по введенным точкам
         {
+            
             Point temp = new Point(0, 0);
             Point p1 = new Point(0, 0);
             Point p2 = new Point(0, 0);
@@ -53,15 +54,21 @@ namespace Triangle
             p3.X = points[2].X + temp.X;
             p3.Y = points[2].Y + temp.Y;
 
-            newpoints.Add(p1);
-            newpoints.Add(p2);
-            newpoints.Add(p3);
-            newpoints.Add(p1);
+            // построение сторон треугольника происходит посредством вычисления вершин.
+            // вычисление вершин производится благодаря построению  отрезков:
+            // Triangle_P1 = P1 + (P2 - P3)
+            // Triangle_P2 = P1 - (P2 - P3)
+            // Triangle_P3 = P3 + (P2 - P1)
 
-            view.DrawTriangle(map, newpoints);
+            newpoints.Add(p1); // добавление в конец списка newpoints значения координат вершин треугольника
+            newpoints.Add(p2); // добавление в конец списка newpoints значения координат вершин треугольника
+            newpoints.Add(p3); // добавление в конец списка newpoints значения координат вершин треугольника
+            newpoints.Add(p1); // добавление в конец списка newpoints значения координат вершин треугольника
+
+            view.DrawTriangle(map, newpoints); // вызов метода отрисовки треугольника
         }
 
-        public void ClearDots()
+        public void ClearDots() // метод очистки списков с указанными координатами пользователем и вычисленными вершинами треугольника
         {
             points.Clear();
             points.TrimExcess();

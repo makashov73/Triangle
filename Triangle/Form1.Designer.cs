@@ -44,7 +44,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(600, 380);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
+            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick); // обработка клиеов мыши по элементу PictureBox1 для проставления точек
             // 
             // button1
             // 
